@@ -28,7 +28,7 @@ router.get('/books/new', asyncHandler(async (req, res) => {
   res.render('new-book', { book: {}, title: 'New Book' })
 }))
 
-// books is not a static variable, and will change
+// books is not a static variable, and will change. Posts new book to db
 router.post('/books/new', asyncHandler(async (req, res) => {
   let book
   try {
@@ -39,6 +39,7 @@ router.post('/books/new', asyncHandler(async (req, res) => {
       book = await Book.build(req.body)
       res.render('new-book', { book, errors: error.errors, title: 'New Book' })
     } else {
+      console.log(error)
       throw error
     }
   }

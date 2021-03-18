@@ -4,6 +4,7 @@ block content
   h1 New Book
 
   form(method='post')
+    include error
     p
       label(for='title') Title
       input#title(name='title', type='text')
