@@ -1,9 +1,10 @@
-extends layout
-
-block content
-
-h1 Page Not Found
-p Sorry! We couldn&apos;t find the page you were looking for.
-br
-p
-  a.button(href='all_books.html') Home
+doctype html
+html
+  head
+    title Page Not Found
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  h1 Page Not Found
+  p Apologies, but your page is not here.
+  br
+  p
+    a.button(href='/books') Home
