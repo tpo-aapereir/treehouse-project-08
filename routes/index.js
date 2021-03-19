@@ -15,15 +15,16 @@ function asyncHandler (cb) {
   }
 }
 
+// GET Home Page via a redirect
 router.get('/', (req, res, next) => { res.redirect('/books') })
 
-// GET home page
+// GET Home Page and display the books
 router.get('/books', asyncHandler(async (req, res) => {
   const books = await Book.findAll()
   res.render('index', { books, title: 'Books' })
 }))
 
-// get new book route
+// get new book route, allowing entry of a new title
 router.get('/books/new', asyncHandler(async (req, res) => {
   res.render('new-book', { book: {}, title: 'New Book' })
 }))
