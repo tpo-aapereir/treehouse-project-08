@@ -17,7 +17,7 @@ function asyncHandler (cb) {
 
 router.get('/', (req, res, next) => { res.redirect('/books') })
 
-/* GET home page. */
+// GET home page
 router.get('/books', asyncHandler(async (req, res) => {
   const books = await Book.findAll()
   res.render('index', { books, title: 'Books' })

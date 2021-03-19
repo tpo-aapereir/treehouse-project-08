@@ -24,7 +24,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter);
 
 // async IIFE
-// used to test code, but will replace with data as we proceed
+// used to log connectivity success or failure
 (async () => {
   try {
     await sequelize.authenticate()
@@ -41,13 +41,6 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-
-  // if (err.status === 404) {
-  //   err.message = 'Apologies, but your page is not here.'
-  // } else {
-  //  err.message = 'It seems the server is not responding, pity.'
-  // }
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
