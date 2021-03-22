@@ -24,7 +24,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter);
 
 // async IIFE
-// used to log connectivity success or failure
+// used to log connectivity success or failure with an error
 (async () => {
   try {
     await sequelize.authenticate()
