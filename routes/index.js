@@ -3,7 +3,10 @@ const router = express.Router()
 const Book = require('../models').Book
 const Sequelize = require('sequelize')
 
-/* from Treehouse workshop - Handler function to wrap each route. */
+/* from Treehouse workshop - Handler function to wrap each route.
+* @param {*} cb
+* Allows for errors to be passed to global error handling
+*/
 function asyncHandler (cb) {
   return async (req, res, next) => {
     try {
@@ -29,7 +32,9 @@ router.get('/books/new', asyncHandler(async (req, res) => {
   res.render('new-book', { book: {}, title: 'New Book' })
 }))
 
-// books is not a static variable, and will change. Posts new book to db
+/* books is not a static variable, and will change. Posts new book to db
+* try/catch block used here to log an error if needed
+*/
 router.post('/books/new', asyncHandler(async (req, res) => {
   let book
   try {
@@ -46,7 +51,7 @@ router.post('/books/new', asyncHandler(async (req, res) => {
   }
 }))
 
-// GET bookid, will show detailed information
+// GET bookid, will show detailed information of selected title or render an error
 router.get('/books/:id', asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id)
   if (book) {
