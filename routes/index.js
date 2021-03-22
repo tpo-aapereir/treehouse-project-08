@@ -51,7 +51,7 @@ router.post('/books/new', asyncHandler(async (req, res) => {
   }
 }))
 
-// GET bookid, will show detailed information of selected title or render an error
+// GET bookid, will show detailed information of selected title and its property or render an error
 router.get('/books/:id', asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id)
   if (book) {
@@ -61,7 +61,10 @@ router.get('/books/:id', asyncHandler(async (req, res) => {
   }
 }))
 
-// POST books/:id - this will update the existing title
+/* POST books/:id - this will update the existing title that is selected
+* built a 404 error into this route should one occurr when loading the page
+* using a try/catch here as well to trigger an error if the required fields are left blank
+*/
 router.post('/books/:id', asyncHandler(async (req, res) => {
   let book
   try {
