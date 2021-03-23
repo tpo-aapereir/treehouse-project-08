@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const Book = require('../models').Book
-const Sequelize = require('sequelize')
 
 /* from Treehouse workshop - Handler function to wrap each route.
 * @param {*} cb
@@ -45,7 +44,7 @@ router.post('/books/new', asyncHandler(async (req, res) => {
       book = await Book.build(req.body)
       res.render('new-book', { book, errors: error.errors, title: 'New Book' })
     } else {
-      console.log(error)
+    // console.log(error)
       throw error
     }
   }
@@ -92,5 +91,15 @@ router.post('/books/:id/delete', asyncHandler(async (req, res) => {
   await book.destroy()
   res.redirect('/books')
 }))
+
+router.use((req, res, next) => {
+  res.render('page-not-found', {
+    err:
+    {
+      message: 'That page does not exist, please go back.',
+      status: 404
+    }
+  })
+})
 
 module.exports = router

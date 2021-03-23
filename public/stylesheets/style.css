@@ -99,6 +99,6 @@ input[type=text] {
 body {
   filter: blur(0.02em);
   mix-blend-mode: multiply;
-  background: url('/images/bookBackground.jpg');
+  background: url('/images/bookStack.jpg');
   background-size: cover;
 }
