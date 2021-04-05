@@ -39,6 +39,11 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
+  if (err.status === 404) {
+    err.message = 'Apologies, but your page is not here.'
+  } else {
+    err.message = 'It seems the server is not responding, pity.'
+  }
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
