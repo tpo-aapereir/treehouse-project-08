@@ -1,10 +1,11 @@
-doctype html
-html
-  head
-    title Page Not Found
-    link(rel='stylesheet', href='/stylesheets/style.css')
+extends layout
+
+block content
   h1 Page Not Found
-  p Apologies, but your page is not here.
-  br
-  p
-    a.button(href='/books') Home
+    p=message
+    p
+      a.button(href='/books') Home
+    br
+    p=error.status
+  
+    

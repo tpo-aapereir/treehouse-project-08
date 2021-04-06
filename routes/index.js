@@ -51,12 +51,15 @@ router.post('/books/new', asyncHandler(async (req, res) => {
 }))
 
 // GET bookid, will show detailed information of selected title and its property or render an error
-router.get('/books/:id', asyncHandler(async (req, res) => {
+router.get('/books/:id', asyncHandler(async (req, res, next) => {
   const book = await Book.findByPk(req.params.id)
   if (book) {
     res.render('update-book', { book: book })
   } else {
-    res.render('page-not-found')
+    const err = new Error()
+    err.status = 404
+    err.message = "Looks like the page you requested doesn't exist."
+    next(err)
   }
 }))
 
@@ -91,7 +94,7 @@ router.post('/books/:id/delete', asyncHandler(async (req, res) => {
   await book.destroy()
   res.redirect('/books')
 }))
-
+/*
 router.use((req, res, next) => {
   res.render('page-not-found', {
     err:
@@ -101,5 +104,6 @@ router.use((req, res, next) => {
     }
   })
 })
+*/
 
 module.exports = router

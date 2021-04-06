@@ -20,9 +20,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter);
-
 // async IIFE
-// used to log connectivity success or failure with an error
 (async () => {
   try {
     await sequelize.authenticate()
@@ -32,13 +30,15 @@ app.use('/', indexRouter);
   }
 })()
 
-// catch 404 from an undefined URL and forward to error handler
+// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))
 })
 
 // error handler
 app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  console.log('global')
   if (err.status === 404) {
     err.message = 'Apologies, but your page is not here.'
   } else {
@@ -49,7 +49,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500)
-  res.render('error')
+  res.render('page-not-found', err)
 })
 
 module.exports = app
